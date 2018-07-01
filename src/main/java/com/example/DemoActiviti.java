@@ -17,7 +17,7 @@ public class DemoActiviti {
                 .createProcessEngineConfigurationFromResource("activiti.cfg.xml");
         ProcessEngine processEngine = cfg.buildProcessEngine();
 
-        //createIdentity(processEngine, "programmer", "programmers");
+        createIdentity(processEngine, "programmer", "programmers");
         createIdentity(processEngine, "tester", "testers");
     }
 
