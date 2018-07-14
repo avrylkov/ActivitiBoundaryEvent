@@ -3,8 +3,6 @@ package com.example;
 import org.activiti.engine.*;
 import org.activiti.engine.form.FormData;
 import org.activiti.engine.form.FormProperty;
-import org.activiti.engine.identity.Group;
-import org.activiti.engine.identity.User;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -62,7 +60,7 @@ public class DemoActiviti {
         List<Task> tasks = new ArrayList<>();
         if ("develop".equals(mode)) {
             System.out.println("develop mode");
-            // Задачи для разработчика
+            // получить задачи для разработчика
             tasks = taskService.createTaskQuery().taskCandidateGroup("programmers").list();
             if (tasks.isEmpty()) {
                 System.out.println("Задач на разработку нет");
@@ -72,7 +70,7 @@ public class DemoActiviti {
 
         if ("test".equals(mode)) {
             System.out.println("test mode");
-            // Задачи для тестирования
+            // получить задачи для тестирования
             tasks = taskService.createTaskQuery().taskCandidateGroup("testers").list();
             if (tasks.isEmpty()) {
                 System.out.println("Задач на тестирование нет");
@@ -89,12 +87,13 @@ public class DemoActiviti {
                 System.out.println("Task:" + task.getTaskDefinitionKey() + ", id=" + task.getId());
                 FormData formData = formService.getTaskFormData(task.getId());
                 Map<String, Object> variables = new HashMap<String, Object>();
+                // переменные задачи
                 for (FormProperty formProperty : formData.getFormProperties()) {
                     System.out.println("Enter varName <" + formProperty.getName() +">:");
                     String value = scanner.nextLine();
                     variables.put(formProperty.getId(), value);
                 }
-
+                // выполняем задачу
                 taskService.complete(task.getId(), variables);
                 System.out.println("Task complete success:" + task.getTaskDefinitionKey());
             }
@@ -104,34 +103,5 @@ public class DemoActiviti {
         }
     }
 
-    public static void createIdentity(ProcessEngine processEngine, String userName, String userGroup) {
-        IdentityService identityService = processEngine.getIdentityService();
-
-        String userId = userName + "Id";
-        if (identityService.createUserQuery().userId(userId).count() == 0) {
-            User user = identityService.newUser(userName);
-            user.setId(userId);
-            user.setEmail(userName + "@gmail.com");
-            identityService.saveUser(user);
-
-            System.out.println("user created success fully");
-        }
-
-        String groupId = userGroup + "Id";
-        if (identityService.createGroupQuery().groupId(groupId).count() == 0) {
-            Group group = identityService.newGroup(userGroup);
-            group.setName(userGroup);
-            group.setId(groupId);
-
-            identityService.saveGroup(group);
-
-            System.out.println("group created success fully");
-        }
-
-        if (identityService.createGroupQuery().groupId(groupId).list().size() > 0) {
-            identityService.createMembership(userId, groupId);
-            System.out.println("user to group success fully");
-        }
-    }
 }
 
