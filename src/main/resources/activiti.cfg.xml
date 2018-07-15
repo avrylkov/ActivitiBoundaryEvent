@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-        <property name="username" value="BPM" />
-        <property name="password" value="1" />
-    </bean>
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
+        <property name="jdbcDriver" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="jdbcUsername" value="BPM" />
+        <property name="jdbcPassword" value="1" />
 
-    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-        <property name="dataSource" ref="dataSource" />
-        <property name="transactionManager" ref="transactionManager" />
-        <property name="databaseSchemaUpdate" value="true" />
+        <!-- Database configurations -->
+        <property name="databaseSchemaUpdate" value="false" />
+
         <property name="asyncExecutorActivate" value="false" />
+
+        <!-- mail server configurations -->
+        <property name="mailServerPort" value="5025" />
     </bean>
 
 </beans>
