@@ -5,12 +5,12 @@ import org.activiti.engine.delegate.JavaDelegate;
 
 import java.util.Date;
 
-public class DemoDelegate implements JavaDelegate {
+public class DemoDelegate2 implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
         Date now = new Date();
-        execution.setVariable("Variable", now.toString());
-        System.out.println("DemoDelegate job start="+now);
+        execution.setVariable("Variable2", now.toString());
+        System.out.println("DemoDelegate2 job start="+now);
     }
 }

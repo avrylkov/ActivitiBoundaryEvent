@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class DemoActiviti {
 
-    private static final String DEV_PROCESS = "devProcessJob";
+    private static final String DEV_PROCESS = "boundaryEvent7";
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
@@ -33,8 +33,8 @@ public class DemoActiviti {
         Deployment deployment;
         if ("deploy".equals(mode)) {
             deployment = repositoryService.createDeployment()
-                    .addClasspathResource("processes/MyProcessJob.bpmn").deploy();
-            System.out.println("deploy process success");
+                    .addClasspathResource("processes/BoundaryEvent.bpmn").deploy();
+            System.out.println("deploy process success " + deployment.getId());
             System.exit(0);
         } else {
             List<Deployment> myProcesses = repositoryService.createDeploymentQuery()
