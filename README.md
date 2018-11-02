@@ -19,4 +19,6 @@ SELECT * FROM act_ru_timer_job;
 SELECT * FROM act_hi_varinst;
 
 Если изменили bpmn, то увеличиваем Id process = boundaryEventXX в bpmn
-в коде java указываем тот же Id, DEV_PROCESS = boundaryEventXX
+в коде java указываем тот же Id, DEV_PROCESS = boundaryEventXX 
+и запускаем 
+java -jar DemoActiviti-1.0-SNAPSHOT-jar-with-dependencies.jar deploy
