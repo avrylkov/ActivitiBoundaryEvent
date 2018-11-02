@@ -2,6 +2,10 @@
 Activiti Boundary Event
 
 Собирать maven package
+
+установить в локальный репозиторий ojdbc6.jar
+mvn install:install-file -Dfile=G:/Project/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+
 deploy BoundaryEvent.bpmn
 java -jar DemoActiviti-1.0-SNAPSHOT-jar-with-dependencies.jar deploy
 
