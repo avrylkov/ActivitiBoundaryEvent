@@ -17,3 +17,6 @@ SELECT * FROM act_ru_timer_job;
 
 историю переменных здесь
 SELECT * FROM act_hi_varinst;
+
+Если изменили bpmn, то увеличиваем Id process = boundaryEventXX в bpmn
+в коде java указываем тот же Id, DEV_PROCESS = boundaryEventXX
